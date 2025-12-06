@@ -39,6 +39,7 @@ biblio:
     cd "bibliografia/" && lualatex --interaction=batchmode --draftmode main.tex 
     cd "bibliografia/" && lualatex --interaction=batchmode main.tex
     mv "bibliografia/main.pdf" "bibliografia/bibliografia.pdf" 
+    cp "bibliografia/bibliografia.pdf" "pdfs/bibliografia.pdf"
 
 mapa:
     cd "scripts/R/" && R CMD BATCH mapa.R
@@ -47,8 +48,11 @@ clean target:
     cd {{aulassrc}}{{target}} && rm -f main.aux main.bbl main.bcf *.log main.blg main.log main.out main.run.xml main.lof main.synctex.gz main.toc
 
 clean-all: (clean "apostila") (clean "livro")
+  rm pdfs/*
 
-release: all
+zip:
   ouch compress {{aulaspdfs}}/* $(jq --raw-output ".[\"version\"]" proj.json).zip
+
+release: all zip
 
 init: clean-all all
