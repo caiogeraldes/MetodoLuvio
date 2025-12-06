@@ -1,10 +1,10 @@
 aulassrc := "./"
-aulaspdfs := "./PDFs/"
+aulaspdfs := "./pdfs/"
 
 default:
     just --list
 
-all: (build "Apostila") (build "Livro") biblio
+all: (build "apostila") (build "livro") biblio
 
 build target:
     cd {{aulassrc}}{{target}} && lualatex --interaction=batchmode --draftmode main.tex 
@@ -33,22 +33,22 @@ debug target:
     cp -r {{aulassrc}}{{target}}/main.log debug/.
 
 biblio:
-    cd "Bibliografia/" && rm -f main.aux main.bbl main.bcf *.log main.blg main.log main.out main.run.xml main.lof main.synctex.gz main.toc
-    cd "Bibliografia/" && lualatex --interaction=batchmode --draftmode main.tex 
-    cd "Bibliografia/" && biber --quiet main 
-    cd "Bibliografia/" && lualatex --interaction=batchmode --draftmode main.tex 
-    cd "Bibliografia/" && lualatex --interaction=batchmode main.tex
-    mv "Bibliografia/main.pdf" "Bibliografia/Bibliografia.pdf" 
+    cd "bibliografia/" && rm -f main.aux main.bbl main.bcf *.log main.blg main.log main.out main.run.xml main.lof main.synctex.gz main.toc
+    cd "bibliografia/" && lualatex --interaction=batchmode --draftmode main.tex 
+    cd "bibliografia/" && biber --quiet main 
+    cd "bibliografia/" && lualatex --interaction=batchmode --draftmode main.tex 
+    cd "bibliografia/" && lualatex --interaction=batchmode main.tex
+    mv "bibliografia/main.pdf" "bibliografia/bibliografia.pdf" 
 
 mapa:
-    cd "Scripts/R/" && R CMD BATCH mapa.R
+    cd "scripts/R/" && R CMD BATCH mapa.R
 
 clean target:
     cd {{aulassrc}}{{target}} && rm -f main.aux main.bbl main.bcf *.log main.blg main.log main.out main.run.xml main.lof main.synctex.gz main.toc
 
-clean-all: (clean "Apostila") (clean "Livro")
+clean-all: (clean "apostila") (clean "livro")
 
-release:
+release: all
   ouch compress {{aulaspdfs}}/* $(jq --raw-output ".[\"version\"]" proj.json).zip
 
 init: clean-all all

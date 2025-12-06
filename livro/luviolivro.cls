@@ -1,18 +1,22 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{luvio}[2024/08/28 Apostila Lúvio]
+\ProvidesClass{luviolivro}[2025-12-06 Apostila Lúvio]
 
-\DeclareOption{article}{
-	\AtBeginDocument{\pagestyle{plain}}
-	\AtBeginDocument{\chapterstyle{article}}
-	\PassOptionsToClass{article}{memoir}}
-\DeclareOption{apostila}{
-	\AtBeginDocument{\pagestyle{companion}}
-	\AtBeginDocument{\chapterstyle{hangnum}}
-}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions\relax
+\LoadClass{memoir}
 
-\LoadClass[a4paper,12pt]{memoir}
+\pagestyle{companion}
+\chapterstyle{hangnum}
 
+\usepackage[fontsize=11pt]{scrextend}
+\settypeoutlayoutunit{mm}
+\setstocksize{230mm}{160mm}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\setlrmarginsandblock{18mm}{23mm}{*}
+\setulmarginsandblock{25mm}{25mm}{*}
+\setmarginnotes{0mm}{0mm}{0mm}
+\setlength{\footskip}{1.5\baselineskip}
+\checkandfixthelayout%
 
 % Dependencies
 \RequirePackage{ccicons}
@@ -50,17 +54,17 @@
 \babelfont[brazil]{sf}[Scale=0.8]{Noto Sans}
 \babelfont[brazil]{tt}[Scale=0.8]{Mononoki Nerd Font}
 
-\babelfont[german]{rm}[
-	SmallCapsFont=Gentium Plus,
-	SmallCapsFeatures={Letters=SmallCaps}]{Crimson Pro}
-\babelfont[german]{sf}[Scale=0.8]{Noto Sans}
-\babelfont[german]{tt}[Scale=0.8]{Mononoki Nerd Font}
-
 \babelfont[english]{rm}[
 	SmallCapsFont=Gentium Plus,
 	SmallCapsFeatures={Letters=SmallCaps}]{Crimson Pro}
 \babelfont[english]{sf}[Scale=0.8]{Noto Sans}
 \babelfont[english]{tt}[Scale=0.8]{Mononoki Nerd Font}
+
+\babelfont[german]{rm}[
+	SmallCapsFont=Gentium Plus,
+	SmallCapsFeatures={Letters=SmallCaps}]{Crimson Pro}
+\babelfont[german]{sf}[Scale=0.8]{Noto Sans}
+\babelfont[german]{tt}[Scale=0.8]{Mononoki Nerd Font}
 
 \babelprovide[import, onchar=ids fonts letters]{ancientgreek}
 \babelfont[ancientgreek]{rm}{Brill}
@@ -101,17 +105,11 @@
 \renewcommand{\subsectionautorefname}{Subseção}
 
 
+% Decorando bibliografia
 \RequirePackage[backend=biber,
-	style=abnt,
-	repeatfields,
-	scbib,
-	ittitles,
-	indent,
-	giveninits,
-	justify,
-	noslsn,
-	natbib,
-	extrayear,
+	style=./biblatex/abnt-caio, language=brazil,
+	pretty, autolang=hyphen,
+	pretty, repeatfields, noslsn, natbib, extrayear
 ]{biblatex}
 
 % Hyperref
@@ -165,17 +163,6 @@
 
 % Estilo
 
-\settrimmedsize{\stockheight}{\stockwidth}{*}
-\settypeblocksize{220mm}{130mm}{*}
-\setlrmargins{*}{*}{1.7}
-\setulmargins{30mm}{*}{*}
-\setmarginnotes{20pt}{100pt}{10pt}
-\checkandfixthelayout%
-
-% \setsidefeet{\marginparsep}{\marginparwidth}%
-% {0.8\onelineskip}{0pt}%
-% {\normalfont\footnotesize}{\textheight}%
-\setsidecaps{\marginparsep}{\marginparwidth}
 \setlength{\footmarkwidth}{0.5em}
 \setlength{\footmarksep}{0em}
 \setlength{\footparindent}{0em}
@@ -228,7 +215,7 @@
 			\foreignlanguage{hebrew}{Ezra SIL} {עֶזְרָא} para o hebraico e
 			Ullikummi \foreignlanguage{hittite}{𒌌𒇷𒆪𒌝𒈪} para o hitita.
 			Todos os \emph{softwares} utilizados na
-			diagramação deste documento são gratuitos e \emph{open source}.\par
+			diagramação deste document são gratuitos e \emph{open source}.\par
 			{\today.}
 		\end{center}
 	\end{adjustwidth}
@@ -240,7 +227,7 @@
 	{
 			\thispagestyle{empty}
 			\flushright%
-			\AddToShipoutPictureFG*{\includegraphics[width=\paperwidth, height=\paperheight]{../Mídia/capa.png}}
+			\AddToShipoutPictureFG*{\includegraphics[width=\paperwidth, height=\paperheight]{../mídia/capa.png}}
 			\vspace*{45mm}
 			\noindent {\scalefont{10}\thetitle}
 			\vfill
@@ -286,7 +273,7 @@
 
 
 			\vfill{}
-			2024\\
+			2025\\
 			\ccbyncsa%
 
 		}
@@ -360,3 +347,24 @@
 \ifluatex%
 	\RequirePackage{pietex}
 \fi
+
+
+% set \clubpenalty, etc. to distinctive values for use
+% in tracing page breaks. These values are chosen so that
+% no single penalty will absolutely prohibit a page break, but
+% certain combinations of two or more will.
+\clubpenalty=9996
+\widowpenalty=9999
+\brokenpenalty=4991
+% Reiterate the default value of \redisplaypenalty, for
+% completeness.
+% Set postdisplaypenalty to a fairly high value to discourage a
+% page break between a display and a widow line at the end of a
+% paragraph.
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+% And then \displaywidowpenalty should be at least as high as
+% \postdisplaypenalty, otherwise in a situation where two displays
+% are separated by two lines, TeX will prefer to break between the
+% two lines, rather than before the first line.
+\displaywidowpenalty=1602

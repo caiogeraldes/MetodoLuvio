@@ -4,9 +4,9 @@
 
 Os `pdfs` estão disponíveis na área
 [release](https://github.com/caiogeraldes/MetodoLuvio/releases).
-Incluo uma versão chamada `Apostila.pdf` para aqueles interessados em imprimir
+Incluo uma versão chamada `apostila.pdf` para aqueles interessados em imprimir
 em papel A4 o material.
-A versão que um dia pretendo disponibilizar impressa chama-se `Livro.pdf`.
+A versão que um dia pretendo disponibilizar impressa chama-se `livro.pdf`.
 
 ## Criando uma cópia do curso
 

@@ -1,10 +1,10 @@
 %! TeX program = lualatex
-\documentclass[apostila]{luvio}
+\documentclass{luviolivro}
 
 \title{Lúvio Hieroglífico}
 \author{Caio Geraldes}
 
-\addbibresource{../Bibliografia/biblio.bib}
+\addbibresource{../bibliografia/biblio.bib}
 
 
 \begin{document}
@@ -25,6 +25,7 @@
 
 \cleardoublepage%
 \listoffigures*
+
 
 \chap{Prefácio}
 
@@ -99,14 +100,17 @@ biscoitos quando brevemente nos conhecemos por uma chamada de vídeo.
 
 \chap{Signário}
 \input{./chaps/logogramas.tex}
-%
-%
+
+
 % \chap{Glossário}
 
 \chap{Leituras extras}
 \input{./chaps/02_extras.tex}
 
-\printbibliography%
+{
+	\SingleSpacing*
+	\printbibliography%
+}
 
 \cleardoublepage%
 
