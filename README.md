@@ -2,6 +2,11 @@
 
 **Autor:** Caio Geraldes <[caio.geraldes@usp.br](mailto:caio.geraldes@usp.br)>
 
+## PDFs
+
+Os `pdfs` estão disponíveis na área
+[release](https://github.com/caiogeraldes/MetodoLuvio/releases).
+
 ## Criando uma cópia do curso
 
 Se você quiser construir o método, é necessário ter instalados
@@ -25,15 +30,6 @@ Rode a inicialização:
 ```{bash}
 just init
 ```
-
-Se a inicialização falhar no primeiro comando, cheque o resultado de:
-
-```{just}
-just prepare
-```
-
-É necessário que o usuário do sistema consiga escrever na pasta `$TEXMFHOME`.
-
 
 ## Licença
 
