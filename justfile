@@ -48,8 +48,7 @@ clean target:
 
 clean-all: (clean "Apostila") (clean "Livro")
 
-prepare:
-     mkdir -p $(echo $TEXMFHOME)generic/tex --verbose
-     git clone https://github.com/caiogeraldes/luvio-cls $(echo $TEXMFHOME)generic/tex/luvio
+release:
+  ouch compress {{aulaspdfs}}/* $(jq --raw-output ".[\"version\"]" proj.json).zip
 
-init: prepare clean-all all
+init: clean-all all
