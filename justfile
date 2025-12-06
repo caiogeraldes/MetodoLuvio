@@ -1,10 +1,10 @@
 aulassrc := "./"
-aulaspdfs := "./PDFS/"
+aulaspdfs := "./PDFs/"
 
 default:
     just --list
 
-all: (build "Apostila") biblio
+all: (build "Apostila") (build "Livro") biblio
 
 build target:
     cd {{aulassrc}}{{target}} && lualatex --interaction=batchmode --draftmode main.tex 
@@ -46,7 +46,7 @@ mapa:
 clean target:
     cd {{aulassrc}}{{target}} && rm -f main.aux main.bbl main.bcf *.log main.blg main.log main.out main.run.xml main.lof main.synctex.gz main.toc
 
-clean-all: (clean "Apostila") (clean "Signário")
+clean-all: (clean "Apostila") (clean "Livro")
 
 prepare:
      mkdir -p $(echo $TEXMFHOME)generic/tex --verbose

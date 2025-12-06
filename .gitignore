@@ -311,3 +311,5 @@ TSWLatexianTemp*
 main.pdf
 
 debug/
+PDFs/
+*.pdf
